@@ -8,6 +8,10 @@
 
 import Foundation
 
+public protocol SessionChallangeHandlerProtocol {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+}
+
 public class CustomHTTPProtocol: URLProtocol {
     static var ignoredHosts = [String]()
     @available(*, deprecated, renamed: "ignoredHosts")
@@ -19,6 +23,8 @@ public class CustomHTTPProtocol: URLProtocol {
             ignoredHosts = newValue
         }
     }
+    /// custom credential challenge handler
+    public static var sessionChallengeHandler: SessionChallangeHandlerProtocol?
 
     struct Constants {
         static let RequestHandledKey = "URLProtocolRequestHandled"
@@ -131,6 +137,10 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     }
     
     public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if let handler = Self.sessionChallengeHandler {
+            handler.urlSession(session, didReceive: challenge, completionHandler: completionHandler)
+            return
+        }
         let protectionSpace = challenge.protectionSpace
         let sender = challenge.sender
         
