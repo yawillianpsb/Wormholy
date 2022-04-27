@@ -17,6 +17,8 @@ public class Wormholy: NSObject
         set { CustomHTTPProtocol.ignoredHosts = newValue }
     }
 
+    public static var eventMonitor: WormholyEventMonitorType { Storage.shared }
+
     /// Hosts that will be ignored from being recorded
     ///
     @objc public static var ignoredHosts: [String] {

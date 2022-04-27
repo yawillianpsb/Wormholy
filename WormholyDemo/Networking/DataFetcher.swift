@@ -7,10 +7,45 @@
 //
 
 import Foundation
+import Wormholy
+
+class SessionDelegate: NSObject, URLSessionDataDelegate {
+
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        Wormholy.eventMonitor.didReceive(dataTask, response: response)
+        completionHandler(.allow)
+    }
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    }
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        Wormholy.eventMonitor.didReceive(task, error: error)
+    }
+}
+
+class WormholySession {
+    let session: URLSession
+    init(configuration: URLSessionConfiguration, delegate: URLSessionDelegate?, delegateQueue queue: OperationQueue?) {
+        session = .init(configuration: configuration, delegate: delegate, delegateQueue: queue)
+    }
+    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        var expectedTask: URLSessionDataTask?
+        let newHandler: (Data?, URLResponse?, Error?) -> Void = {
+            if let expectedTask = expectedTask {
+                Wormholy.eventMonitor.didReceive(expectedTask, data: $0, response: $1, error: $2)
+            }
+            completionHandler($0, $1, $2)
+        }
+        let task = session.dataTask(with: request, completionHandler: newHandler)
+        expectedTask = task
+        Wormholy.eventMonitor.didStart(task, session: session)
+        return task
+    }
+}
 
 class DataFetcher: NSObject {
 
-    var session : URLSession? //Session manager
+    var session : WormholySession? //Session manager
+    var delegate: SessionDelegate?
     
     //MARK: Singleton
     static let sharedInstance = DataFetcher(managerCachePolicy: .reloadIgnoringLocalCacheData)
@@ -31,7 +66,8 @@ class DataFetcher: NSObject {
         sessionConfiguration.timeoutIntervalForRequest = 10.0
         sessionConfiguration.requestCachePolicy = cachePolicy != nil ? cachePolicy! : .reloadIgnoringLocalCacheData
         sessionConfiguration.httpAdditionalHeaders = ["Accept-Language": "en"]
-        self.session = URLSession(configuration: sessionConfiguration)
+        delegate = .init()
+        self.session = WormholySession(configuration: sessionConfiguration, delegate: delegate, delegateQueue: nil)
     }
     
     
@@ -52,7 +88,7 @@ class DataFetcher: NSObject {
                 completion()
             }
         }
-        
+
         task?.resume()
     }
     
@@ -72,7 +108,7 @@ class DataFetcher: NSObject {
                 completion()
             }
         }
-        
+
         task?.resume()
     }
     
@@ -92,7 +128,7 @@ class DataFetcher: NSObject {
                 completion()
             }
         }
-        
+
         task?.resume()
     }
     
@@ -112,7 +148,7 @@ class DataFetcher: NSObject {
                 completion()
             }
         }
-        
+
         task?.resume()
     }
 }
