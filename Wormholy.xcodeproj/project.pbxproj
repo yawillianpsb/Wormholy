@@ -104,10 +104,6 @@
 		455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocol.swift; sourceTree = "<group>"; };
 		455818C2207D61A100D2F954 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		455818C8207D621200D2F954 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
-		455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormholyMethodSwizzling.m; sourceTree = "<group>"; };
-		455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+Wormholy.m"; sourceTree = "<group>"; };
-		455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+Wormholy.h"; sourceTree = "<group>"; };
-		455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormholyMethodSwizzling.h; sourceTree = "<group>"; };
 		457202A5244CA7BE0020AA2A /* Postman_demo_collection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Postman_demo_collection.json; sourceTree = "<group>"; };
 		45820CF5208170F400CA74D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyDetailViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +116,6 @@
 		45C4F4F220860FBC007D0D17 /* WHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTextView.swift; sourceTree = "<group>"; };
 		45C51A1620A1FDBC006933CE /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		45C51A1720A20B38006933CE /* Wormholy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wormholy.h; sourceTree = "<group>"; };
-		45CDAFA32433616800F83C22 /* WormholyConstructor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WormholyConstructor.m; sourceTree = "<group>"; };
 		45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
 		45FF5C4920875EFA0084BD50 /* WHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHView.swift; sourceTree = "<group>"; };
 		45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTitleSectionView.swift; sourceTree = "<group>"; };
@@ -274,18 +269,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		455818CA207D647900D2F954 /* Objc */ = {
-			isa = PBXGroup;
-			children = (
-				455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */,
-				455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */,
-				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
-				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
-				45CDAFA32433616800F83C22 /* WormholyConstructor.m */,
-			);
-			path = Objc;
-			sourceTree = "<group>";
-		};
 		45FF5C4820875ED90084BD50 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,7 +329,6 @@
 				45C51A1720A20B38006933CE /* Wormholy.h */,
 				451C9E532080E592002A34BC /* UI */,
 				451C9E562080E5F0002A34BC /* Subclasses */,
-				455818CA207D647900D2F954 /* Objc */,
 				455818C7207D620900D2F954 /* Models */,
 				454BBA362087B64E00EB13E9 /* Utils */,
 				451C9E5C2080EFC4002A34BC /* Support Files */,
