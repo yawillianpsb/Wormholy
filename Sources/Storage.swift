@@ -11,18 +11,24 @@ import Foundation
 open class Storage: NSObject {
 
     public static let shared: Storage = Storage()
-  
+
     public static var limit: NSNumber? = nil
 
     public static var defaultFilter: String? = nil
-    
+
     open var requests: [RequestModel] = []
-    
+
+    private let storageQueue: OperationQueue = {
+        let oq = OperationQueue()
+        oq.maxConcurrentOperationCount = 1
+        return oq
+    }()
+
     func saveRequest(request: RequestModel?){
         guard request != nil else {
             return
         }
-        
+
         if let index = requests.firstIndex(where: { (req) -> Bool in
             return request?.id == req.id ? true : false
         }){
@@ -34,7 +40,9 @@ open class Storage: NSObject {
         if let limit = Self.limit?.intValue {
             requests = Array(requests.prefix(limit))
         }
-        NotificationCenter.default.post(name: newRequestNotification, object: nil)
+        OperationQueue.main.addOperation {
+            NotificationCenter.default.post(name: newRequestNotification, object: nil)
+        }
     }
 
     func clearRequests() {
@@ -45,53 +53,65 @@ open class Storage: NSObject {
 extension Storage: WormholyEventMonitorType {
 
     public func updateRequest(_ task: URLSessionTask, request: URLRequest) {
-        guard let model = getRequest(for: task) else { return }
-        model.httpBody = body(from: request)
-        updateDuration(in: model)
-        saveRequest(request: model)
+        storageQueue.addOperation {
+            guard let model = self.getRequest(for: task) else { return }
+            model.httpBody = self.body(from: request)
+            self.updateDuration(in: model)
+            self.saveRequest(request: model)
+        }
     }
 
     public func didStart(_ task: URLSessionTask, session: URLSession?) {
-        guard let request = task.currentRequest else { return }
-        let model = RequestModel(id: getId(for: task), request: request as NSURLRequest, session: session)
-        saveRequest(request: model)
+        storageQueue.addOperation {
+            guard let request = task.currentRequest else { return }
+            let model = RequestModel(id: self.getId(for: task), request: request as NSURLRequest, session: session)
+            self.saveRequest(request: model)
+        }
     }
 
     public func didReceive(_ task: URLSessionTask, data: Data?, response: URLResponse?, error: Error?) {
-        if let response = response {
-            didReceive(task, response: response)
-        }
-        if let data = data {
-            didReceive(task, data: data)
-        }
-        if let error = error {
-            didReceive(task, error: error)
+        storageQueue.addOperation {
+            if let response = response {
+                self.didReceive(task, response: response)
+            }
+            if let data = data {
+                self.didReceive(task, data: data)
+            }
+            if let error = error {
+                self.didReceive(task, error: error)
+            }
         }
     }
 
     public func didReceive(_ task: URLSessionTask, data: Data) {
-        guard let request = getRequest(for: task) else { return }
-        if request.dataResponse == nil {
-            request.dataResponse = data
-        } else {
-            request.dataResponse?.append(data)
+        storageQueue.addOperation {
+            guard let request = self.getRequest(for: task) else { return }
+            if request.dataResponse == nil {
+                request.dataResponse = data
+            } else {
+                request.dataResponse?.append(data)
+            }
+            self.updateDuration(in: request)
+            self.saveRequest(request: request)
         }
-        updateDuration(in: request)
-        saveRequest(request: request)
     }
 
     public func didReceive(_ task: URLSessionTask, response: URLResponse) {
-        guard let request = getRequest(for: task) else { return }
-        request.initResponse(response: response)
-        updateDuration(in: request)
-        saveRequest(request: request)
+        storageQueue.addOperation {
+            guard let request = self.getRequest(for: task) else { return }
+            request.initResponse(response: response)
+            self.updateDuration(in: request)
+            self.saveRequest(request: request)
+        }
     }
 
     public func didReceive(_ task: URLSessionTask, error: Error?) {
-        guard let request = getRequest(for: task) else { return }
-        request.errorClientDescription = error?.localizedDescription
-        updateDuration(in: request)
-        saveRequest(request: request)
+        storageQueue.addOperation {
+            guard let request = self.getRequest(for: task) else { return }
+            request.errorClientDescription = error?.localizedDescription
+            self.updateDuration(in: request)
+            self.saveRequest(request: request)
+        }
     }
 
 }
@@ -117,5 +137,5 @@ private extension Storage {
     func getId(for task: URLSessionTask) -> String {
         task.description
     }
-    
+
 }
