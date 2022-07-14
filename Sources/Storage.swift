@@ -62,9 +62,9 @@ extension Storage: WormholyEventMonitorType {
     }
 
     public func didStart(_ task: URLSessionTask, session: URLSession?) {
+        guard let request = task.currentRequest else { return }
+        let model = RequestModel(id: self.getId(for: task), request: request as NSURLRequest, session: session)
         storageQueue.addOperation {
-            guard let request = task.currentRequest else { return }
-            let model = RequestModel(id: self.getId(for: task), request: request as NSURLRequest, session: session)
             self.saveRequest(request: model)
         }
     }
