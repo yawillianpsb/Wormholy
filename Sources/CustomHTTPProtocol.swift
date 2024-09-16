@@ -26,7 +26,7 @@ public class CustomHTTPProtocol: URLProtocol {
     
     var session: URLSession?
     var sessionTask: URLSessionDataTask?
-    var currentRequest: RequestModel?
+    var eventMonitor: WormholyEventMonitorType = Storage.shared
     
     override init(request: URLRequest, cachedResponse: CachedURLResponse?, client: URLProtocolClient?) {
         super.init(request: request, cachedResponse: cachedResponse, client: client)
@@ -52,21 +52,21 @@ public class CustomHTTPProtocol: URLProtocol {
     override public func startLoading() {
         let newRequest = ((request as NSURLRequest).mutableCopy() as? NSMutableURLRequest)!
         CustomHTTPProtocol.setProperty(true, forKey: Constants.RequestHandledKey, in: newRequest)
-        sessionTask = session?.dataTask(with: newRequest as URLRequest)
-        sessionTask?.resume()
+        guard let session = session else {
+            return
+        }
+        let task = session.dataTask(with: newRequest as URLRequest)
+        sessionTask = task
+        task.resume()
         
-        currentRequest = RequestModel(request: newRequest, session: session)
-        Storage.shared.saveRequest(request: currentRequest)
+        eventMonitor.didStart(task, session: session)
     }
     
     override public func stopLoading() {
-        sessionTask?.cancel()
-        currentRequest?.httpBody = body(from: request)
-        if let startDate = currentRequest?.date{
-            currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
+        if let sessionTask = sessionTask {
+            eventMonitor.updateRequest(sessionTask, request: request)
         }
-
-        Storage.shared.saveRequest(request: currentRequest)
+        sessionTask?.cancel()
         session?.invalidateAndCancel()
     }
     
@@ -88,31 +88,25 @@ public class CustomHTTPProtocol: URLProtocol {
     deinit {
         session = nil
         sessionTask = nil
-        currentRequest = nil
     }
 }
 
 extension CustomHTTPProtocol: URLSessionDataDelegate {
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         client?.urlProtocol(self, didLoad: data)
-        if currentRequest?.dataResponse == nil{
-            currentRequest?.dataResponse = data
-        }
-        else{
-            currentRequest?.dataResponse?.append(data)
-        }
+        eventMonitor.didReceive(dataTask, data: data)
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         let policy = URLCache.StoragePolicy(rawValue: request.cachePolicy.rawValue) ?? .notAllowed
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: policy)
-        currentRequest?.initResponse(response: response)
+        eventMonitor.didReceive(dataTask, response: response)
         completionHandler(.allow)
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
-            currentRequest?.errorClientDescription = error.localizedDescription
+            eventMonitor.didReceive(task, error: error)
             client?.urlProtocol(self, didFailWithError: error)
         } else {
             client?.urlProtocolDidFinishLoading(self)
@@ -126,7 +120,6 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         guard let error = error else { return }
-        currentRequest?.errorClientDescription = error.localizedDescription
         client?.urlProtocol(self, didFailWithError: error)
     }
     

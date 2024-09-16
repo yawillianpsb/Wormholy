@@ -26,8 +26,8 @@ open class RequestModel: Codable {
     open var errorClientDescription: String?
     open var duration: Double?
     
-    init(request: NSURLRequest, session: URLSession?) {
-        id = UUID().uuidString
+    init(id: String = UUID().uuidString, request: NSURLRequest, session: URLSession?) {
+        self.id = id
         url = request.url?.absoluteString ?? ""
         host = request.url?.host
         port = request.url?.port

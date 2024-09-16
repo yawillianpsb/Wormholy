@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Limit the number of API requests stored
         Wormholy.limit = 10
+        Wormholy.swiftyLoad()
         
         return true
     }

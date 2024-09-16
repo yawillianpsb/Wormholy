@@ -18,10 +18,6 @@
 #endif
 
 
-#import "NSURLSessionConfiguration+Wormholy.h"
-#import "WormholyMethodSwizzling.h"
-
-
 FOUNDATION_EXPORT double WormholyVersionNumber;
 FOUNDATION_EXPORT const unsigned char WormholyVersionString[];
 

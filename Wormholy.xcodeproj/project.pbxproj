@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251CC28D28182E9900A54759 /* WormholyEventMonitorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251CC28C28182E9900A54759 /* WormholyEventMonitorType.swift */; };
 		4508718C207E59FF00EE2D31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718B207E59FF00EE2D31 /* AppDelegate.swift */; };
 		4508718E207E59FF00EE2D31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718D207E59FF00EE2D31 /* ViewController.swift */; };
 		45087191207E59FF00EE2D31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4508718F207E59FF00EE2D31 /* Main.storyboard */; };
@@ -36,10 +37,6 @@
 		455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */; };
 		455818C4207D61A100D2F954 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C2207D61A100D2F954 /* Storage.swift */; };
 		455818C9207D621200D2F954 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C8207D621200D2F954 /* RequestModel.swift */; };
-		455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */; };
-		455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */; };
-		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		457202A6244CA7BE0020AA2A /* Postman_demo_collection.json in Resources */ = {isa = PBXBuildFile; fileRef = 457202A5244CA7BE0020AA2A /* Postman_demo_collection.json */; };
 		45820CF6208170F400CA74D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45820CF5208170F400CA74D6 /* Colors.swift */; };
 		45868F1420F4E2B10024C77B /* BodyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */; };
@@ -51,7 +48,6 @@
 		45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */; };
 		45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4F220860FBC007D0D17 /* WHTextView.swift */; };
 		45C51A1820A20B38006933CE /* Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C51A1720A20B38006933CE /* Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45CDAFA52433616800F83C22 /* WormholyConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CDAFA32433616800F83C22 /* WormholyConstructor.m */; };
 		45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */; };
 		45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4920875EFA0084BD50 /* WHView.swift */; };
 		45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */; };
@@ -77,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		251CC28C28182E9900A54759 /* WormholyEventMonitorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyEventMonitorType.swift; sourceTree = "<group>"; };
 		45087189207E59FE00EE2D31 /* WormholyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WormholyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4508718B207E59FF00EE2D31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4508718D207E59FF00EE2D31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,10 +104,6 @@
 		455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocol.swift; sourceTree = "<group>"; };
 		455818C2207D61A100D2F954 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		455818C8207D621200D2F954 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
-		455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormholyMethodSwizzling.m; sourceTree = "<group>"; };
-		455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+Wormholy.m"; sourceTree = "<group>"; };
-		455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+Wormholy.h"; sourceTree = "<group>"; };
-		455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormholyMethodSwizzling.h; sourceTree = "<group>"; };
 		457202A5244CA7BE0020AA2A /* Postman_demo_collection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Postman_demo_collection.json; sourceTree = "<group>"; };
 		45820CF5208170F400CA74D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyDetailViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +116,6 @@
 		45C4F4F220860FBC007D0D17 /* WHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTextView.swift; sourceTree = "<group>"; };
 		45C51A1620A1FDBC006933CE /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		45C51A1720A20B38006933CE /* Wormholy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wormholy.h; sourceTree = "<group>"; };
-		45CDAFA32433616800F83C22 /* WormholyConstructor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WormholyConstructor.m; sourceTree = "<group>"; };
 		45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
 		45FF5C4920875EFA0084BD50 /* WHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHView.swift; sourceTree = "<group>"; };
 		45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTitleSectionView.swift; sourceTree = "<group>"; };
@@ -277,18 +269,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		455818CA207D647900D2F954 /* Objc */ = {
-			isa = PBXGroup;
-			children = (
-				455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */,
-				455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */,
-				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
-				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
-				45CDAFA32433616800F83C22 /* WormholyConstructor.m */,
-			);
-			path = Objc;
-			sourceTree = "<group>";
-		};
 		45FF5C4820875ED90084BD50 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,11 +324,11 @@
 				8933C7841EB5B820000D00A4 /* Wormholy.swift */,
 				455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */,
 				455818C2207D61A100D2F954 /* Storage.swift */,
+				251CC28C28182E9900A54759 /* WormholyEventMonitorType.swift */,
 				45C51A1620A1FDBC006933CE /* module.modulemap */,
 				45C51A1720A20B38006933CE /* Wormholy.h */,
 				451C9E532080E592002A34BC /* UI */,
 				451C9E562080E5F0002A34BC /* Subclasses */,
-				455818CA207D647900D2F954 /* Objc */,
 				455818C7207D620900D2F954 /* Models */,
 				454BBA362087B64E00EB13E9 /* Utils */,
 				451C9E5C2080EFC4002A34BC /* Support Files */,
@@ -389,8 +369,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				45C51A1820A20B38006933CE /* Wormholy.h in Headers */,
-				455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */,
-				455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,17 +531,16 @@
 				455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */,
 				45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */,
 				451C9E582080E607002A34BC /* WHNavigationController.swift in Sources */,
-				455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */,
 				8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */,
 				455818C4207D61A100D2F954 /* Storage.swift in Sources */,
 				45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */,
+				251CC28D28182E9900A54759 /* WormholyEventMonitorType.swift in Sources */,
 				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,
 				451C9E5A2080E8D2002A34BC /* WHBaseViewController.swift in Sources */,
 				45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */,
 				45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */,
 				455818C9207D621200D2F954 /* RequestModel.swift in Sources */,
 				45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */,
-				45CDAFA52433616800F83C22 /* WormholyConstructor.m in Sources */,
 				451C9E602080F653002A34BC /* WHBundle.swift in Sources */,
 				64DD525C23F86B3D00AB92C4 /* ShareUtils.swift in Sources */,
 				452CC13421773BF600CB5E21 /* FileHandler.swift in Sources */,
@@ -577,7 +554,6 @@
 				451C9E6920810B98002A34BC /* WHCollectionView.swift in Sources */,
 				45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */,
 				451C9E6B20810BBD002A34BC /* RequestsViewController.swift in Sources */,
-				455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */,
 				45BE33CD258787AB000AEA0E /* InputStream+Utils.swift in Sources */,
 				45FF5C54208794720084BD50 /* WHDate.swift in Sources */,
 				454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */,
